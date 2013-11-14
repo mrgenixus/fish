@@ -53,4 +53,5 @@ set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
 rbenv rehash >/dev/null ^&1
 
+set -xg ANDROID_HOME /usr/local/Cellar/android-sdk/r22.0.4
 set -xg SSL_CERT_FILE /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
