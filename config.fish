@@ -55,3 +55,37 @@ rbenv rehash >/dev/null ^&1
 
 set -xg ANDROID_HOME /usr/local/Cellar/android-sdk/r22.0.4
 set -xg SSL_CERT_FILE /usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
+
+function backup
+
+  if not test $backup
+    echo Backup not set
+    return
+  end
+
+  set args
+  set dest '/'
+  set next 0
+  for x in $argv
+    if not test $next -eq 0
+      echo "NEXT" $x $next
+      set dest $x
+      set next 0
+    else if test "$x" = "to"
+      printf "ARGS: %s, NEXT, %s, X: %s" $args $next $x
+      set next 1
+    else
+      set args $args $x
+    end
+  end
+  if test -d $backup/$dest
+    echo copying $args to $dest
+    cp -r $args $backup/$dest 
+  else 
+    echo creating $backup/$dest
+    mkdir -p  $backup/$dest
+    and echo copying $args to $backup/$dest
+    and cp -r $args $backup/$dest
+  end
+end
+
