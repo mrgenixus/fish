@@ -89,3 +89,10 @@ function backup
   end
 end
 
+function dropbox
+  if not test $dropbox
+    echo '$dropbox not set'
+    return
+  end
+  mv $argv $dropbox
+end
